@@ -77,11 +77,11 @@ export const CurriculumForm = () => {
 
   const handleAdditionalActivityChange = (
     index: number,
-    e: React.ChangeEvent<HTMLInputElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    const { name, value } = e.target;
+    const { value } = e.target;
     const updatedActivities = userProfile.additionalActivities.map(
-      (activity, i) => (i === index ? { ...activity, [name]: value } : activity)
+      (activity, i) => (i === index ? { description: value } : activity)
     );
     setUserProfile({ ...userProfile, additionalActivities: updatedActivities });
   };
@@ -91,7 +91,7 @@ export const CurriculumForm = () => {
       ...userProfile,
       additionalActivities: [
         ...userProfile.additionalActivities,
-        { activity: "", description: "" },
+        { description: "" },
       ],
     });
   };
@@ -299,14 +299,6 @@ export const CurriculumForm = () => {
 
         {userProfile.additionalActivities.map((activity, index) => (
           <div key={index}>
-            <label htmlFor={`activity-${index}`}>Atividade</label>
-            <input
-              id={`activity-${index}`}
-              name="activity"
-              value={activity.description}
-              onChange={(e) => handleAdditionalActivityChange(index, e)}
-            />
-
             <label htmlFor={`description-${index}`}>Descrição</label>
             <textarea
               id={`description-${index}`}
