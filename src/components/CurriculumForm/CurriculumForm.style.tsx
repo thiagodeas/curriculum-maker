@@ -12,7 +12,9 @@ export const StyledForm = styled.form `
     flex-direction: column;
     align-items: center;
     justify-content: center;    
-    background-color: red;
+    background-color: #f8f8f8;
+    border-radius: 5px;
+    box-shadow: 1px 0px 8px #b68077;
     min-height: 100vh;
-    padding: 5rem 0 5rem 0;
+    padding: 5rem;
 `

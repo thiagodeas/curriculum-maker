@@ -7,5 +7,5 @@ export const StyledFooter = styled.footer `
     height: 60px;
     font-size: 1rem;
     font-weight: 600;
-    background-color: #d3d3d3;
+    background-color: #DED7B7;
 `
