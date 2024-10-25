@@ -13,7 +13,7 @@ export const StyledForm = styled.form `
     justify-content: center;    
     background-color: #f1efef;
     border-radius: 5px;
-    box-shadow: 1px 0px 8px #b68077;
+    box-shadow: 1px 0px 8px #363e3f;
     min-height: 100vh;
     width: 800px;
 `
@@ -23,7 +23,7 @@ export const StyledInput = styled.input `
     height: 25px;
     margin-block: 1.2rem;
     padding: 6px 8px 6px 8px;
-    border: solid 1px #69B1B8;
+    border: solid 1px #6D9CA1;
     border-radius: 4px;
     outline: none;
     font-size: 1rem;
@@ -31,13 +31,14 @@ export const StyledInput = styled.input `
 `
 
 export const StyledTextArea = styled.textarea `
-    width: 400px;
+    max-width: 400px;
+    min-width: 400px;
     height: 150px;
     font-size: 14px;
     margin-block: 1.2rem;
     padding: 6px 8px 6px 8px;
     outline: none;
-    border: solid 1px #69B1B8;
+    border: solid 1px #6D9CA1;
 `
 
 export const StyledBorderBox= styled.div `
@@ -45,7 +46,7 @@ export const StyledBorderBox= styled.div `
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border-bottom: solid 2px #69B1B8;
+    border-bottom: solid 2px #6D9CA1;
     width: 100%;
     padding-block: 2rem;
 `
@@ -64,7 +65,7 @@ export const StyledLabelAA = styled.label `
     font-weight: 600;
     margin-top: 2rem;
     padding-bottom: 2rem;
-    color: #585989;
+    color: #546061;
 `
 
 export const StyledContainer = styled.div `
