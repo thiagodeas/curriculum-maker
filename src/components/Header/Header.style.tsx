@@ -1,9 +1,5 @@
 import styled from "styled-components";
 
-export const StyledContainer = styled.div `
-    
-`
-
 export const StyledHeader = styled.header `
     display: flex;
     align-items: center;
@@ -21,15 +17,15 @@ export const StyledHeader = styled.header `
         font-weight: 800;
         letter-spacing: 1px;
         font-family: Verdana, Geneva, Tahoma, sans-serif;
-        color: #585989;
+        color: #f1efef;
     }
 
     p {
-        color: #585989;
+        color: #f1efef;
         font-size: 14px;
         font-family: Arial, Helvetica, sans-serif;
+        font-style: italic;
         font-weight: 100;
-
     }
     div {
         display:flex;

@@ -1,6 +1,7 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { UserProfile } from "../../models/UserProfile";
-import { StyledContainer, StyledForm } from "./CurriculumForm.style";
+import { StyledBorderBox, StyledButton, StyledButtonContainer, StyledContainer, StyledForm, StyledInput, StyledLabel, StyledLabelAA, StyledLabelGeneric, StyledMainContainer, StyledTextArea } from "./CurriculumForm.style";
+import axios, { AxiosResponse } from "axios";
 
 export const CurriculumForm = () => {
   const [userProfile, setUserProfile] = useState<UserProfile>({
@@ -16,15 +17,34 @@ export const CurriculumForm = () => {
     linkedin: "",
     github: "",
     aboutMe: "",
-    frontEndSkills: "",
-    backEndSkills: "",
-    databaseSkills: "",
-    cloudSkills: "",
-    otherSkills: "",
-    education: [{ courseName: "", institution: "", year: "" }],
+    frontEndKnowledge: "",
+    backEndKnowledge: "",
+    databaseKnowledge: "",
+    cloudKnowledge: "",
+    othersKnowledge: "",
+    education: [{ course: "", institution: "", year: "" }],
     projects: [{ title: "", description: "" }],
     additionalActivities: [{ description: "" }],
   });
+  const [pdfUrl, setPdfUrl] = useState<string | null>(null);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    try {
+      const response: AxiosResponse = await axios.post('http://localhost:8080/api/curriculum/generate', userProfile
+      );
+
+      if (response.status === 200) {
+        setPdfUrl(response.data);
+      }
+  } catch (error) {
+    console.error("Erro ao gerar o currículo:", error);
+    if (axios.isAxiosError(error)) {
+      console.error("Resposta do Servidor:", error.response?.data);
+    }
+  };
+};
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -52,7 +72,7 @@ export const CurriculumForm = () => {
       ...userProfile,
       education: [
         ...userProfile.education,
-        { courseName: "", institution: "", year: "" },
+        { course: "", institution: "", year: "" },
       ],
     });
   };
@@ -97,222 +117,253 @@ export const CurriculumForm = () => {
   };
 
   return (
-    <StyledContainer>
-      <StyledForm>
-        <label htmlFor="fullName">Nome Completo</label>
-        <input
+    <StyledMainContainer>
+      <StyledForm onSubmit={handleSubmit}>
+      <StyledBorderBox>
+      <StyledLabel htmlFor="personalData">Dados Pessoais e Conhecimentos</StyledLabel>
+        <StyledLabelGeneric htmlFor="fullName">Nome Completo</StyledLabelGeneric>
+        <StyledInput
           id="fullName"
           name="fullName"
           value={userProfile.fullName}
           onChange={handleChange}
         />
 
-        <label htmlFor="jobTitle">Título profissional</label>
-        <input
+        <StyledLabelGeneric htmlFor="jobTitle">Título profissional</StyledLabelGeneric>
+        <StyledInput
           id="jobTitle"
           name="jobTitle"
           value={userProfile.jobTitle}
           onChange={handleChange}
         />
 
-        <label htmlFor="nationality">Nacionalidade</label>
-        <input
+        <StyledLabelGeneric htmlFor="nationality">Nacionalidade</StyledLabelGeneric>
+        <StyledInput
           id="nationality"
           name="nationality"
           value={userProfile.nationality}
           onChange={handleChange}
         />
 
-        <label htmlFor="maritalStatus">Estado Civil</label>
-        <input
+        <StyledLabelGeneric htmlFor="maritalStatus">Estado Civil</StyledLabelGeneric>
+        <StyledInput
           id="maritalStatus"
           name="maritalStatus"
           value={userProfile.maritalStatus}
           onChange={handleChange}
         />
 
-        <label htmlFor="city">Cidade</label>
-        <input
+        <StyledLabelGeneric htmlFor="city">Cidade</StyledLabelGeneric>
+        <StyledInput
           id="city"
           name="city"
           value={userProfile.city}
           onChange={handleChange}
         />
 
-        <label htmlFor="state">Estado(UF)</label>
-        <input
+        <StyledLabelGeneric htmlFor="state">Estado (UF)</StyledLabelGeneric>
+        <StyledInput
           id="state"
           name="state"
           value={userProfile.state}
           onChange={handleChange}
         />
 
-        <label htmlFor="country">País</label>
-        <input
+        <StyledLabelGeneric htmlFor="country">País</StyledLabelGeneric>
+        <StyledInput
           id="country"
           name="country"
           value={userProfile.country}
           onChange={handleChange}
         />
 
-        <label htmlFor="phone">Telefone</label>
-        <input
+        <StyledLabelGeneric htmlFor="phone">Telefone</StyledLabelGeneric>
+        <StyledInput
           id="phone"
           name="phone"
           value={userProfile.phone}
           onChange={handleChange}
         />
 
-        <label htmlFor="email">Email</label>
-        <input
+        <StyledLabelGeneric htmlFor="email">Email</StyledLabelGeneric>
+        <StyledInput
           id="email"
           name="email"
           value={userProfile.email}
           onChange={handleChange}
         />
 
-        <label htmlFor="linkedin">LinkedIn</label>
-        <input
+        <StyledLabelGeneric htmlFor="linkedin">LinkedIn</StyledLabelGeneric>
+        <StyledInput
           id="linkedin"
           name="linkedin"
           value={userProfile.linkedin}
           onChange={handleChange}
         />
 
-        <label htmlFor="github">GitHub</label>
-        <input
+        <StyledLabelGeneric htmlFor="github">GitHub</StyledLabelGeneric>
+        <StyledInput
           id="github"
           name="github"
           value={userProfile.github}
           onChange={handleChange}
         />
 
-        <label htmlFor="aboutMe">Sobre</label>
-        <textarea
+        <StyledLabelGeneric htmlFor="aboutMe">Sobre</StyledLabelGeneric>
+        <StyledTextArea
           id="aboutMe"
           name="aboutMe"
           value={userProfile.aboutMe}
           onChange={handleChange}
         />
 
-        <label htmlFor="frontEndSkills">Habilidades FrontEnd</label>
-        <input
-          id="frontEndSkills"
-          name="frontEndSkills"
-          value={userProfile.frontEndSkills}
+        <StyledLabelGeneric htmlFor="frontEndKnowledge">Conhecimentos em FrontEnd</StyledLabelGeneric>
+        <StyledInput
+          id="frontEndKnowledge"
+          name="frontEndKnowledge"
+          value={userProfile.frontEndKnowledge}
           onChange={handleChange}
         />
 
-        <label htmlFor="backEndSkills">Habilidades BackEnd</label>
-        <input
-          id="backEndSkills"
-          name="backEndSkills"
-          value={userProfile.backEndSkills}
+        <StyledLabelGeneric htmlFor="backEndKnowledge">Conhecimentos em BackEnd</StyledLabelGeneric>
+        <StyledInput
+          id="backEndKnowledge"
+          name="backEndKnowledge"
+          value={userProfile.backEndKnowledge}
           onChange={handleChange}
         />
 
-        <label htmlFor="databaseSkills">Habilidades Banco de Dados</label>
-        <input
-          id="databaseSkills"
-          name="databaseSkills"
-          value={userProfile.databaseSkills}
+        <StyledLabelGeneric htmlFor="databaseKnowledge">Conhecimentos em Banco de Dados</StyledLabelGeneric>
+        <StyledInput
+          id="databaseKnowledge"
+          name="databaseKnowledge"
+          value={userProfile.databaseKnowledge}
           onChange={handleChange}
         />
 
-        <label htmlFor="cloudSkills">Habilidades Nuvem</label>
-        <input
-          id="cloudSkills"
-          name="cloudSkills"
-          value={userProfile.cloudSkills}
+        <StyledLabelGeneric htmlFor="cloudKnowledge">Conhecimentos em Nuvem</StyledLabelGeneric>
+        <StyledInput
+          id="cloudKnowledge"
+          name="cloudKnowledge"
+          value={userProfile.cloudKnowledge}
           onChange={handleChange}
         />
 
-        <label htmlFor="otherSkills">Outras Habilidades</label>
-        <input
-          id="otherSkills"
-          name="otherSkills"
-          value={userProfile.otherSkills}
+        <StyledLabelGeneric htmlFor="othersKnowledge">Outros Conhecimentos</StyledLabelGeneric>
+        <StyledInput
+          id="othersKnowledge"
+          name="othersKnowledge"
+          value={userProfile.othersKnowledge}
           onChange={handleChange}
         />
+        </ StyledBorderBox>
 
-        <label htmlFor="education">Educação</label>
+        <StyledBorderBox>
+
+        <StyledLabel htmlFor="education">Educação</StyledLabel>
 
         {userProfile.education.map((edu, index) => (
-          <div key={index}>
-            <label htmlFor={`courseName-${index}`}>Nome do Curso</label>
-            <input
-              id={`courseName-${index}`}
-              name="courseName"
-              value={edu.courseName}
+          <StyledContainer key={index}>
+            <StyledLabelGeneric htmlFor={`course-${index}`}>Curso</StyledLabelGeneric>
+            <StyledInput
+              id={`course-${index}`}
+              name="course"
+              value={edu.course}
               onChange={(e) => handleEducationChange(index, e)}
             />
 
-            <label htmlFor={`institution-${index}`}>Instituição</label>
-            <input
+            <StyledLabelGeneric htmlFor={`institution-${index}`}>Instituição</StyledLabelGeneric>
+            <StyledInput
               id={`institution-${index}`}
               name="institution"
               value={edu.institution}
               onChange={(e) => handleEducationChange(index, e)}
             />
 
-            <label htmlFor={`year-${index}`}>Ano</label>
-            <input
+            <StyledLabelGeneric htmlFor={`year-${index}`}>Ano</StyledLabelGeneric>
+            <StyledInput
               id={`year-${index}`}
               name="year"
               value={edu.year}
               onChange={(e) => handleEducationChange(index, e)}
             />
-          </div>
+          </StyledContainer>
         ))}
 
-        <button type="button" onClick={addEducationField}>
-          Adicionar Formação
-        </button>
+        <StyledButtonContainer>
+          <StyledButton type="button" onClick={addEducationField}>
+            Adicionar Formação
+          </StyledButton>
+        </StyledButtonContainer>
 
-        <label htmlFor="projects">Projetos</label>
+        </StyledBorderBox>
+
+        <StyledBorderBox>
+
+
+        <StyledLabel htmlFor="projects">Projetos</StyledLabel>
 
         {userProfile.projects.map((project, index) => (
-          <div key={index}>
-            <label htmlFor={`title-${index}`}>Título do Projeto</label>
-            <input
+          <StyledContainer key={index}>
+            <StyledLabelGeneric htmlFor={`title-${index}`}>Título do Projeto</StyledLabelGeneric>
+            <StyledInput
               id={`title-${index}`}
               name="title"
               value={project.title}
               onChange={(e) => handleProjectChange(index, e)}
             />
 
-            <label htmlFor={`description-${index}`}>Descrição do Projeto</label>
-            <textarea
+            <StyledLabelGeneric htmlFor={`description-${index}`}>Descrição do Projeto</StyledLabelGeneric>
+            <StyledTextArea
               id={`description-${index}`}
               name="description"
               value={project.description}
               onChange={(e) => handleProjectChange(index, e)}
             />
-          </div>
+          </StyledContainer>
         ))}
 
-        <button type="button" onClick={addProjectField}>
+        <StyledButtonContainer>
+        <StyledButton type="button" onClick={addProjectField}>
           Adicionar Projeto
-        </button>
+        </StyledButton>
+        </StyledButtonContainer>
 
-        <label htmlFor="additionalActivities">Atividades Adicionais</label>
+        </StyledBorderBox>
+        
+        <StyledBorderBox>
+          
+        <StyledLabelAA htmlFor="additionalActivities">Atividades Adicionais</StyledLabelAA>
 
         {userProfile.additionalActivities.map((activity, index) => (
-          <div key={index}>
-            <label htmlFor={`description-${index}`}>Descrição</label>
-            <textarea
+          <StyledContainer key={index}>
+            <StyledLabelGeneric htmlFor={`description-${index}`}>Descrição</StyledLabelGeneric>
+            <StyledTextArea
               id={`description-${index}`}
               name="description"
               value={activity.description}
               onChange={(e) => handleAdditionalActivityChange(index, e)}
             />
-          </div>
+          </StyledContainer>
         ))}
 
-        <button type="button" onClick={addAdditionalActivityField}>
-          Adicionar Atividade
-        </button>
+        <StyledButtonContainer>
+          <StyledButton type="button" onClick={addAdditionalActivityField}>
+            Adicionar Atividade
+          </StyledButton>
+        </StyledButtonContainer>
+        
+        </StyledBorderBox>
+        <StyledButtonContainer>
+          <StyledButton type="submit">Gerar Currículo</StyledButton>
+        </StyledButtonContainer>
+        {pdfUrl && (
+  <a href={pdfUrl} target="_blank" rel="noopener noreferrer">
+    Baixar Currículo
+  </a>
+)}
+
       </StyledForm>
-    </StyledContainer>
+    </StyledMainContainer>
   );
 };

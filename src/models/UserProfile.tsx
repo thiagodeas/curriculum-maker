@@ -11,13 +11,13 @@ export interface UserProfile {
     linkedin: string;
     github: string;
     aboutMe: string;
-    frontEndSkills: string;
-    backEndSkills: string;
-    databaseSkills: string;
-    cloudSkills: string;
-    otherSkills: string;
+    frontEndKnowledge: string;
+    backEndKnowledge: string;
+    databaseKnowledge: string;
+    cloudKnowledge: string;
+    othersKnowledge: string;
     education: Array<{
-        courseName: string;
+        course: string;
         institution: string;
         year: string;
     }>;
