@@ -26,24 +26,28 @@ export const CurriculumForm = () => {
     projects: [{ title: "", description: "" }],
     additionalActivities: [{ description: "" }],
   });
-  const [pdfUrl, setPdfUrl] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     try {
-      const response: AxiosResponse = await axios.post('http://localhost:8080/api/curriculum/generate', userProfile
+      const response: AxiosResponse = await axios.post('http://localhost:8080/api/curriculum/generate', userProfile,
+      { responseType: 'blob' }
       );
 
-      if (response.status === 200) {
-        setPdfUrl(response.data);
-      }
+      const pdfBlob = new Blob([response.data], { type: 'application/pdf' });
+      const pdfUrl = URL.createObjectURL(pdfBlob);
+
+      const link = document.createElement('a');
+      link.href = pdfUrl;
+      link.download = 'Curriculum-Maker.pdf';
+      link.click();
+
+      URL.revokeObjectURL(pdfUrl);
+
   } catch (error) {
     console.error("Erro ao gerar o currículo:", error);
-    if (axios.isAxiosError(error)) {
-      console.error("Resposta do Servidor:", error.response?.data);
-    }
-  };
+  }
 };
 
   const handleChange = (
@@ -357,12 +361,6 @@ export const CurriculumForm = () => {
         <StyledButtonContainer>
           <StyledButton type="submit">Gerar Currículo</StyledButton>
         </StyledButtonContainer>
-        {pdfUrl && (
-  <a href={pdfUrl} target="_blank" rel="noopener noreferrer">
-    Baixar Currículo
-  </a>
-)}
-
       </StyledForm>
     </StyledMainContainer>
   );
