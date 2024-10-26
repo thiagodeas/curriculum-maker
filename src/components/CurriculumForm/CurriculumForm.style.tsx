@@ -28,6 +28,10 @@ export const StyledInput = styled.input `
     outline: none;
     font-size: 1rem;
     text-align: center;
+
+    &::placeholder {
+        font-size: 15px;
+    }
 `
 
 export const StyledTextArea = styled.textarea `
@@ -35,10 +39,16 @@ export const StyledTextArea = styled.textarea `
     min-width: 400px;
     height: 150px;
     font-size: 14px;
+    border-radius: 4px;
+    text-align: center;
     margin-block: 1.2rem;
-    padding: 6px 8px 6px 8px;
+    padding: 9px 8px 6px 8px;
     outline: none;
     border: solid 1px #6D9CA1;
+
+    &::placeholder {
+        font-size: 14px;
+    }
 `
 
 export const StyledBorderBox= styled.div `

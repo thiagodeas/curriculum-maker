@@ -131,6 +131,8 @@ export const CurriculumForm = () => {
           name="fullName"
           value={userProfile.fullName}
           onChange={handleChange}
+          placeholder="Digite seu nome completo"
+          required
         />
 
         <StyledLabelGeneric htmlFor="jobTitle">Título profissional</StyledLabelGeneric>
@@ -139,6 +141,8 @@ export const CurriculumForm = () => {
           name="jobTitle"
           value={userProfile.jobTitle}
           onChange={handleChange}
+          placeholder="Ex: FullStack Developer"
+          required
         />
 
         <StyledLabelGeneric htmlFor="nationality">Nacionalidade</StyledLabelGeneric>
@@ -147,6 +151,8 @@ export const CurriculumForm = () => {
           name="nationality"
           value={userProfile.nationality}
           onChange={handleChange}
+          placeholder="Ex: Brasileiro"
+          required
         />
 
         <StyledLabelGeneric htmlFor="maritalStatus">Estado Civil</StyledLabelGeneric>
@@ -155,6 +161,8 @@ export const CurriculumForm = () => {
           name="maritalStatus"
           value={userProfile.maritalStatus}
           onChange={handleChange}
+          placeholder="Ex: Casado"
+          required
         />
 
         <StyledLabelGeneric htmlFor="city">Cidade</StyledLabelGeneric>
@@ -163,6 +171,8 @@ export const CurriculumForm = () => {
           name="city"
           value={userProfile.city}
           onChange={handleChange}
+          placeholder="Ex: Fortaleza"
+          required
         />
 
         <StyledLabelGeneric htmlFor="state">Estado (UF)</StyledLabelGeneric>
@@ -171,6 +181,8 @@ export const CurriculumForm = () => {
           name="state"
           value={userProfile.state}
           onChange={handleChange}
+          placeholder="Ex: CE"
+          required
         />
 
         <StyledLabelGeneric htmlFor="country">País</StyledLabelGeneric>
@@ -179,6 +191,8 @@ export const CurriculumForm = () => {
           name="country"
           value={userProfile.country}
           onChange={handleChange}
+          placeholder="Ex: Brasil"
+          required
         />
 
         <StyledLabelGeneric htmlFor="phone">Telefone</StyledLabelGeneric>
@@ -187,6 +201,8 @@ export const CurriculumForm = () => {
           name="phone"
           value={userProfile.phone}
           onChange={handleChange}
+          placeholder="(DDD) 00000-0000"
+          required
         />
 
         <StyledLabelGeneric htmlFor="email">Email</StyledLabelGeneric>
@@ -195,6 +211,8 @@ export const CurriculumForm = () => {
           name="email"
           value={userProfile.email}
           onChange={handleChange}
+          placeholder="Digite seu email"
+          required
         />
 
         <StyledLabelGeneric htmlFor="linkedin">LinkedIn</StyledLabelGeneric>
@@ -203,6 +221,8 @@ export const CurriculumForm = () => {
           name="linkedin"
           value={userProfile.linkedin}
           onChange={handleChange}
+          placeholder="Digite a URL do seu Perfil"
+          required
         />
 
         <StyledLabelGeneric htmlFor="github">GitHub</StyledLabelGeneric>
@@ -211,6 +231,8 @@ export const CurriculumForm = () => {
           name="github"
           value={userProfile.github}
           onChange={handleChange}
+          placeholder="Digite a URL do seu Perfil"
+          required
         />
 
         <StyledLabelGeneric htmlFor="aboutMe">Sobre</StyledLabelGeneric>
@@ -219,6 +241,8 @@ export const CurriculumForm = () => {
           name="aboutMe"
           value={userProfile.aboutMe}
           onChange={handleChange}
+          placeholder="Resumo do seu perfil profissional"
+          required
         />
 
         <StyledLabelGeneric htmlFor="frontEndKnowledge">Conhecimentos em FrontEnd</StyledLabelGeneric>
@@ -227,6 +251,8 @@ export const CurriculumForm = () => {
           name="frontEndKnowledge"
           value={userProfile.frontEndKnowledge}
           onChange={handleChange}
+          placeholder="Ex: JavaScript, TypeScript"
+          required
         />
 
         <StyledLabelGeneric htmlFor="backEndKnowledge">Conhecimentos em BackEnd</StyledLabelGeneric>
@@ -235,6 +261,8 @@ export const CurriculumForm = () => {
           name="backEndKnowledge"
           value={userProfile.backEndKnowledge}
           onChange={handleChange}
+          placeholder="Ex: Java, Spring Boot"
+          required
         />
 
         <StyledLabelGeneric htmlFor="databaseKnowledge">Conhecimentos em Banco de Dados</StyledLabelGeneric>
@@ -243,6 +271,8 @@ export const CurriculumForm = () => {
           name="databaseKnowledge"
           value={userProfile.databaseKnowledge}
           onChange={handleChange}
+          placeholder="Ex: MySQL, PostgreSQL"
+          required
         />
 
         <StyledLabelGeneric htmlFor="cloudKnowledge">Conhecimentos em Nuvem</StyledLabelGeneric>
@@ -251,6 +281,8 @@ export const CurriculumForm = () => {
           name="cloudKnowledge"
           value={userProfile.cloudKnowledge}
           onChange={handleChange}
+          placeholder="Ex: AWS"
+          required
         />
 
         <StyledLabelGeneric htmlFor="othersKnowledge">Outros Conhecimentos</StyledLabelGeneric>
@@ -259,6 +291,8 @@ export const CurriculumForm = () => {
           name="othersKnowledge"
           value={userProfile.othersKnowledge}
           onChange={handleChange}
+          placeholder="Ex: Git, GitHub, Postman"
+          required
         />
         </ StyledBorderBox>
 
@@ -274,6 +308,8 @@ export const CurriculumForm = () => {
               name="course"
               value={edu.course}
               onChange={(e) => handleEducationChange(index, e)}
+              placeholder="Ex: Curso de React"
+              required
             />
 
             <StyledLabelGeneric htmlFor={`institution-${index}`}>Instituição</StyledLabelGeneric>
@@ -282,6 +318,8 @@ export const CurriculumForm = () => {
               name="institution"
               value={edu.institution}
               onChange={(e) => handleEducationChange(index, e)}
+              placeholder="Nome da instituição do curso"
+              required
             />
 
             <StyledLabelGeneric htmlFor={`year-${index}`}>Ano</StyledLabelGeneric>
@@ -290,6 +328,8 @@ export const CurriculumForm = () => {
               name="year"
               value={edu.year}
               onChange={(e) => handleEducationChange(index, e)}
+              placeholder="Ano de Conclusão/Previsão"
+              required
             />
           </StyledContainer>
         ))}
@@ -315,6 +355,8 @@ export const CurriculumForm = () => {
               name="title"
               value={project.title}
               onChange={(e) => handleProjectChange(index, e)}
+              placeholder="Digite o título do projeto"
+              required
             />
 
             <StyledLabelGeneric htmlFor={`description-${index}`}>Descrição do Projeto</StyledLabelGeneric>
@@ -323,6 +365,8 @@ export const CurriculumForm = () => {
               name="description"
               value={project.description}
               onChange={(e) => handleProjectChange(index, e)}
+              placeholder="Breve descrição do projeto"
+              required
             />
           </StyledContainer>
         ))}
@@ -347,6 +391,8 @@ export const CurriculumForm = () => {
               name="description"
               value={activity.description}
               onChange={(e) => handleAdditionalActivityChange(index, e)}
+              placeholder="Eventos, Mentorias, Voluntariado, etc"
+              required
             />
           </StyledContainer>
         ))}
