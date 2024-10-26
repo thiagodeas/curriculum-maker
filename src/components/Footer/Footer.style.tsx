@@ -6,6 +6,7 @@ export const StyledFooter = styled.footer `
     align-items: center;
     justify-content: center;
     height: 100px;
+    text-align: center;
     font-size: 1.1rem;
     font-weight: 600;
     font-family: Verdana, Geneva, Tahoma, sans-serif;

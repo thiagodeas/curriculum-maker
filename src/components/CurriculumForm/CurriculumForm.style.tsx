@@ -10,6 +10,7 @@ export const StyledForm = styled.form `
     display: flex;
     flex-direction: column;
     align-items: center;
+    text-align: center;
     justify-content: center;    
     background-color: #f1efef;
     border-radius: 5px;
@@ -49,6 +50,11 @@ export const StyledTextArea = styled.textarea `
     &::placeholder {
         font-size: 14px;
     }
+
+    @media (max-width: 500px) {
+        max-width: 300px;
+        min-width: 300px;
+    }
 `
 
 export const StyledBorderBox= styled.div `
@@ -67,6 +73,10 @@ export const StyledLabel = styled.label `
     font-weight: 600;
     padding-bottom: 2rem;
     color: #546061;
+
+    @media (max-width: 600px) {
+            font-size: 1.7rem;
+        }
 `
 
 export const StyledLabelAA = styled.label `
@@ -76,6 +86,10 @@ export const StyledLabelAA = styled.label `
     margin-top: 2rem;
     padding-bottom: 2rem;
     color: #546061;
+
+    @media (max-width: 600px) {
+            font-size: 1.7rem;
+        }
 `
 
 export const StyledContainer = styled.div `

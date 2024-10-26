@@ -9,6 +9,18 @@ export const StyledHeader = styled.header `
 
     img {
         height: 150px;
+
+        @media (max-width: 600px) {
+            height: 120px;
+        }
+
+        @media (max-width: 500px) {
+            height: 100px;
+        }
+
+        @media (max-width: 400px) {
+            height: 80px;
+        }
     }
 
 
@@ -18,6 +30,19 @@ export const StyledHeader = styled.header `
         letter-spacing: 1px;
         font-family: Verdana, Geneva, Tahoma, sans-serif;
         color: #f1efef;
+
+        @media (max-width: 600px) {
+            font-size:2.5rem;
+        }
+
+        @media (max-width: 500px) {
+            font-size: 2rem;
+        }
+
+        @media (max-width: 400px) {
+            font-size: 1.8rem;
+        }
+        
     }
 
     p {
@@ -26,6 +51,14 @@ export const StyledHeader = styled.header `
         font-family: Arial, Helvetica, sans-serif;
         font-style: italic;
         font-weight: 100;
+
+        @media (max-width: 500px) {
+            font-size: 12px;
+        }
+
+        @media (max-width: 400px) {
+            font-size: 11px;
+        }
     }
     div {
         display:flex;
