@@ -44,7 +44,7 @@ export const CurriculumForm = () => {
 
     try {
       const response: AxiosResponse = await axios.post(
-        "http://localhost:8080/api/curriculum/generate",
+        "https://api-curriculum-maker-production.up.railway.app/api/curriculum/generate",
         userProfile,
         { responseType: "blob" }
       );
