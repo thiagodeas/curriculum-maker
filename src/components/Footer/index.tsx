@@ -1,4 +1,4 @@
-import { CiLinkedin, CiYoutube } from "react-icons/ci"
+import { CiLinkedin } from "react-icons/ci"
 import { StyledContainer, StyledFooter, StyledLink } from "./Footer.style"
 import { VscGithubAlt } from "react-icons/vsc"
 
@@ -21,14 +21,6 @@ export const Footer = () => {
                     rel="noopener noreferrer">
                         <VscGithubAlt />
                         </StyledLink>
-
-                    <StyledLink 
-                    href="https://www.youtube.com/@thiagodeas"
-                    target="_blank"
-                    rel="noopener noreferrer">
-                        <CiYoutube />
-                        </StyledLink>
-
                 </StyledContainer>
 
         </StyledFooter>

@@ -1,8 +1,6 @@
 export interface UserProfile {
     fullName: string;
     jobTitle: string;
-    nationality: string;
-    maritalStatus: string;
     city: string;
     state: string;
     country: string;
@@ -11,21 +9,32 @@ export interface UserProfile {
     linkedin: string;
     github: string;
     aboutMe: string;
-    frontEndKnowledge: string;
-    backEndKnowledge: string;
-    databaseKnowledge: string;
-    cloudKnowledge: string;
-    othersKnowledge: string;
+
+    experience: Array<{
+        position: string;
+        company: string;
+        period: string;
+        description: string;
+    }>
+
+    skillCategories: Array<{
+        categoryName: string;
+        skills: Array<string>;
+    }>
+
     education: Array<{
-        course: string;
+        name: string;
         institution: string;
         year: string;
     }>;
+
     projects: Array<{
         title: string;
         description: string;
     }>;
+
     additionalActivities: Array<{
+        period: string;
         description: string;
     }>;
 };
