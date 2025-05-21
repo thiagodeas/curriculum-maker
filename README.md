@@ -1,17 +1,39 @@
 # 📄 Curriculum Maker
 
-Aplicação web para criar currículos minimalistas em PDF a partir dos dados fornecidos pelo usuário.
+A web application to generate minimalist and professional resumes in PDF format based on user-provided data.
 
-## 📝 Descrição
+## 📝 Overview
 
-O **Curriculum Maker** permite que você crie um currículo diretamente no navegador e exporte para PDF. A aplicação foi construída com **React**, **TypeScript**, **Styled Components**, **React-Icons** e **Axios** para comunicação com o backend em **Java** e **Spring Boot**.
+**Curriculum Maker** enables users to build a complete resume directly in the browser and download it as a clean, well-formatted PDF. The frontend is built with **React**, **TypeScript**, **Tailwind CSS**, **React Icons**, and communicates with a backend built in **Java** using **Spring Boot**.
 
-## ✨ Funcionalidades
+## ✨ Features
 
-- ✅ Preencha informações pessoais, experiência, formação e habilidades.
-- 📤 Exporte o currículo para PDF com um design limpo e profissional.
+- ✅ Dynamic form to input personal information, education, skills, and professional experience  
+- 📤 Export resume to PDF with a clean and responsive layout  
+- ⚡ Fast and lightweight interface for an optimal user experience
 
-## 🛠️ Tecnologias Utilizadas
+## 🛠️ Tech Stack
 
-- **Frontend**: React, TypeScript, Styled Components, Axios, React Icons
-- **Backend**: Java, Spring Boot, iText
+- React  
+- TypeScript  
+- Tailwind CSS  
+- Axios  
+- React Icons  
+
+## 🚀 How to Run Locally
+
+Follow these steps to run the project locally:
+
+1.Clone the repository
+```bash
+git clone https://github.com/your-username/curriculum-maker.git
+cd curriculum-maker
+
+# Install dependencies
+npm install
+```
+## Running the app
+```bash
+npm run dev
+```
+The application will be available at http://localhost:5173 by default.
