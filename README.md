@@ -4,7 +4,7 @@ A web application to generate minimalist and professional resumes in PDF format 
 
 ## 📝 Overview
 
-**Curriculum Maker** enables users to build a complete resume directly in the browser and download it as a clean, well-formatted PDF. The frontend is built with **React**, **TypeScript**, **Tailwind CSS**, **React Icons**, and communicates with a backend built in **Java** using **Spring Boot**.
+**Curriculum Maker** enables users to build a complete resume directly in the browser and download it as a clean, well-formatted PDF. The frontend is built with **React**, **TypeScript**, **Styled Components**, **React Icons**, and communicates with a backend built in **Java** using **Spring Boot**.
 
 ## ✨ Features
 
@@ -16,7 +16,7 @@ A web application to generate minimalist and professional resumes in PDF format 
 
 - React  
 - TypeScript  
-- Tailwind CSS  
+- Styled Components  
 - Axios  
 - React Icons  
 
