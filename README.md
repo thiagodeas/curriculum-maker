@@ -18,7 +18,8 @@ A web application to generate minimalist and professional resumes in PDF format 
 - TypeScript  
 - Styled Components  
 - Axios  
-- React Icons  
+- React Icons 
+- React Toastify 
 
 ## 🚀 How to Run Locally
 
@@ -26,13 +27,24 @@ Follow these steps to run the project locally:
 
 1.Clone the repository
 ```bash
-git clone https://github.com/your-username/curriculum-maker.git
+git clone https://github.com/thiagodeas/curriculum-maker.git
 cd curriculum-maker
+```
 
-# Install dependencies
+2.Install dependencies
+```bash
 npm install
 ```
-## Running the app
+
+3.Configuration
+
+Create a `.env` file in the root directory of the project with the following content:
+
+REACT_APP_API_URL=https://your-backend-url/api
+
+Replace `https://your-backend-url/api` with your actual backend API URL.
+
+4.Running the app
 ```bash
 npm run dev
 ```
