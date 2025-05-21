@@ -8,19 +8,17 @@ import {
   StyledForm,
   StyledInput,
   StyledLabel,
-  StyledLabelAA,
   StyledLabelGeneric,
   StyledMainContainer,
   StyledTextArea,
 } from "./CurriculumForm.style";
 import axios, { AxiosResponse } from "axios";
+import { toast } from "react-toastify";
 
 export const CurriculumForm = () => {
   const [userProfile, setUserProfile] = useState<UserProfile>({
     fullName: "",
     jobTitle: "",
-    nationality: "",
-    maritalStatus: "",
     city: "",
     state: "",
     country: "",
@@ -29,14 +27,11 @@ export const CurriculumForm = () => {
     linkedin: "",
     github: "",
     aboutMe: "",
-    frontEndKnowledge: "",
-    backEndKnowledge: "",
-    databaseKnowledge: "",
-    cloudKnowledge: "",
-    othersKnowledge: "",
-    education: [{ course: "", institution: "", year: "" }],
-    projects: [{ title: "", description: "" }],
-    additionalActivities: [{ description: "" }],
+    experience: [],
+    skillCategories: [{ categoryName: "", skills: [""] }],
+    education: [{ name: "", institution: "", year: "" }],
+    projects: [],
+    additionalActivities: [],
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -60,6 +55,24 @@ export const CurriculumForm = () => {
       URL.revokeObjectURL(pdfUrl);
     } catch (error) {
       console.error("Erro ao gerar o currículo:", error);
+
+      let userMessage =
+        "Erro ao gerar o currículo. Tente novamente mais tarde.";
+
+      if (axios.isAxiosError(error)) {
+        const status = error.response?.status;
+
+        if (status === 400) {
+          userMessage =
+            "Dados inválidos. Verifique as informações e tente novamente.";
+        } else if (status === 500) {
+          userMessage = "Erro interno do servidor. Tente novamente mais tarde.";
+        } else if (status) {
+          userMessage = "Não foi possível gerar o currículo.";
+        }
+      }
+
+      toast.error(userMessage);
     }
   };
 
@@ -70,6 +83,62 @@ export const CurriculumForm = () => {
     setUserProfile((prevProfile) => ({
       ...prevProfile,
       [name]: value,
+    }));
+  };
+
+  const handleExperienceChange = (
+    index: number,
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const { name, value } = e.target;
+    const updatedExperiences = userProfile.experience?.map((exp, i) =>
+      i === index ? { ...exp, [name]: value } : exp
+    );
+
+    setUserProfile({ ...userProfile, experience: updatedExperiences });
+  };
+
+  const addExperienceField = () => {
+    setUserProfile({
+      ...userProfile,
+      experience: [
+        ...(userProfile.experience ?? []),
+        { position: "", company: "", period: "", description: "" },
+      ],
+    });
+  };
+
+  const removeExperienceField = (index: number) => {
+    setUserProfile((prev) => ({
+      ...prev,
+      experience: prev.experience?.filter((_, i) => i !== index),
+    }));
+  };
+
+  const handleCategoryChange = (
+    index: number,
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const { name, value } = e.target;
+    const updated = [...userProfile.skillCategories];
+    updated[index][name as "categoryName"] = value;
+    setUserProfile({ ...userProfile, skillCategories: updated });
+  };
+
+  const addSkillCategory = () => {
+    setUserProfile((prev) => ({
+      ...prev,
+      skillCategories: [
+        ...prev.skillCategories,
+        { categoryName: "", skills: [""] },
+      ],
+    }));
+  };
+
+  const removeSkillCategory = (index: number) => {
+    setUserProfile((prev) => ({
+      ...prev,
+      skillCategories: prev.skillCategories.filter((_, i) => i !== index),
     }));
   };
 
@@ -89,9 +158,18 @@ export const CurriculumForm = () => {
       ...userProfile,
       education: [
         ...userProfile.education,
-        { course: "", institution: "", year: "" },
+        { name: "", institution: "", year: "" },
       ],
     });
+  };
+
+  const removeEducationField = (index: number) => {
+    if (userProfile.education.length > 1) {
+      setUserProfile((prev) => ({
+        ...prev,
+        education: prev.education.filter((_, i) => i !== index),
+      }));
+    }
   };
 
   const handleProjectChange = (
@@ -112,13 +190,20 @@ export const CurriculumForm = () => {
     });
   };
 
+  const removeProjectField = (index: number) => {
+    setUserProfile((prev) => ({
+      ...prev,
+      projects: prev.projects.filter((_, i) => i !== index),
+    }));
+  };
+
   const handleAdditionalActivityChange = (
     index: number,
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    const { value } = e.target;
-    const updatedActivities = userProfile.additionalActivities.map(
-      (activity, i) => (i === index ? { description: value } : activity)
+    const { name, value } = e.target;
+    const updatedActivities = userProfile.additionalActivities?.map(
+      (activity, i) => (i === index ? { ...activity, [name]: value } : activity)
     );
     setUserProfile({ ...userProfile, additionalActivities: updatedActivities });
   };
@@ -127,19 +212,26 @@ export const CurriculumForm = () => {
     setUserProfile({
       ...userProfile,
       additionalActivities: [
-        ...userProfile.additionalActivities,
-        { description: "" },
+        ...(userProfile.additionalActivities ?? []),
+        { period: "", description: "" },
       ],
     });
+  };
+
+  const removeAdditionalActivityField = (index: number) => {
+    setUserProfile((prev) => ({
+      ...prev,
+      additionalActivities: prev.additionalActivities?.filter(
+        (_, i) => i !== index
+      ),
+    }));
   };
 
   return (
     <StyledMainContainer>
       <StyledForm onSubmit={handleSubmit}>
         <StyledBorderBox>
-          <StyledLabel htmlFor="personalData">
-            Dados Pessoais e Conhecimentos
-          </StyledLabel>
+          <StyledLabel htmlFor="personalData">Dados Pessoais</StyledLabel>
           <StyledLabelGeneric htmlFor="fullName">
             Nome Completo
           </StyledLabelGeneric>
@@ -160,31 +252,7 @@ export const CurriculumForm = () => {
             name="jobTitle"
             value={userProfile.jobTitle}
             onChange={handleChange}
-            placeholder="Ex: FullStack Developer"
-            required
-          />
-
-          <StyledLabelGeneric htmlFor="nationality">
-            Nacionalidade
-          </StyledLabelGeneric>
-          <StyledInput
-            id="nationality"
-            name="nationality"
-            value={userProfile.nationality}
-            onChange={handleChange}
-            placeholder="Ex: Brasileiro"
-            required
-          />
-
-          <StyledLabelGeneric htmlFor="maritalStatus">
-            Estado Civil
-          </StyledLabelGeneric>
-          <StyledInput
-            id="maritalStatus"
-            name="maritalStatus"
-            value={userProfile.maritalStatus}
-            onChange={handleChange}
-            placeholder="Ex: Casado"
+            placeholder="Ex: Full Stack Developer"
             required
           />
 
@@ -267,66 +335,114 @@ export const CurriculumForm = () => {
             placeholder="Resumo do seu perfil profissional"
             required
           />
+        </StyledBorderBox>
 
-          <StyledLabelGeneric htmlFor="frontEndKnowledge">
-            Conhecimentos em FrontEnd
-          </StyledLabelGeneric>
-          <StyledInput
-            id="frontEndKnowledge"
-            name="frontEndKnowledge"
-            value={userProfile.frontEndKnowledge}
-            onChange={handleChange}
-            placeholder="Ex: JavaScript, TypeScript"
-            required
-          />
+        <StyledBorderBox>
+          <StyledLabel>Experiência Profissional</StyledLabel>
 
-          <StyledLabelGeneric htmlFor="backEndKnowledge">
-            Conhecimentos em BackEnd
-          </StyledLabelGeneric>
-          <StyledInput
-            id="backEndKnowledge"
-            name="backEndKnowledge"
-            value={userProfile.backEndKnowledge}
-            onChange={handleChange}
-            placeholder="Ex: Java, Spring Boot"
-            required
-          />
+          {userProfile.experience?.map((exp, index) => (
+            <StyledContainer key={index}>
+              <StyledLabelGeneric>Cargo</StyledLabelGeneric>
+              <StyledInput
+                id={`position-${index}`}
+                name="position"
+                value={exp.position}
+                onChange={(e) => handleExperienceChange(index, e)}
+                placeholder="Ex: Desenvolvedor Backend Junior"
+              />
 
-          <StyledLabelGeneric htmlFor="databaseKnowledge">
-            Conhecimentos em Banco de Dados
-          </StyledLabelGeneric>
-          <StyledInput
-            id="databaseKnowledge"
-            name="databaseKnowledge"
-            value={userProfile.databaseKnowledge}
-            onChange={handleChange}
-            placeholder="Ex: MySQL, PostgreSQL"
-            required
-          />
+              <StyledLabelGeneric>Empresa</StyledLabelGeneric>
+              <StyledInput
+                id={`company-${index}`}
+                name="company"
+                value={exp.company}
+                onChange={(e) => handleExperienceChange(index, e)}
+                placeholder="Nome da empresa"
+              />
 
-          <StyledLabelGeneric htmlFor="cloudKnowledge">
-            Conhecimentos em Nuvem
-          </StyledLabelGeneric>
-          <StyledInput
-            id="cloudKnowledge"
-            name="cloudKnowledge"
-            value={userProfile.cloudKnowledge}
-            onChange={handleChange}
-            placeholder="Ex: AWS"
-            required
-          />
+              <StyledLabelGeneric>Período</StyledLabelGeneric>
+              <StyledInput
+                id={`period-${index}`}
+                name="period"
+                value={exp.period}
+                onChange={(e) => handleExperienceChange(index, e)}
+                placeholder="Período"
+              />
 
-          <StyledLabelGeneric htmlFor="othersKnowledge">
-            Outros Conhecimentos
-          </StyledLabelGeneric>
-          <StyledInput
-            id="othersKnowledge"
-            name="othersKnowledge"
-            value={userProfile.othersKnowledge}
-            onChange={handleChange}
-            placeholder="Ex: Git, GitHub, Postman"
-            required
-          />
+              <StyledLabelGeneric>Descrição</StyledLabelGeneric>
+              <StyledInput
+                id={`description-${index}`}
+                name="description"
+                value={exp.description}
+                onChange={(e) => handleExperienceChange(index, e)}
+                placeholder="Descrição das atividades"
+              />
+
+              <StyledButtonContainer>
+                <StyledButton
+                  type="button"
+                  onClick={() => removeExperienceField(index)}
+                >
+                  Remover Experiência
+                </StyledButton>
+              </StyledButtonContainer>
+            </StyledContainer>
+          ))}
+
+          <StyledButtonContainer>
+            <StyledButton type="button" onClick={addExperienceField}>
+              Adicionar Experiência
+            </StyledButton>
+          </StyledButtonContainer>
+        </StyledBorderBox>
+
+        <StyledBorderBox>
+          <StyledLabel htmlFor="skills">Conhecimentos</StyledLabel>
+
+          {userProfile.skillCategories.map((category, index) => (
+            <StyledContainer key={index}>
+              <StyledLabelGeneric htmlFor={`category-${index}`}>
+                Categoria
+              </StyledLabelGeneric>
+              <StyledInput
+                id={`category-${index}`}
+                name="categoryName"
+                value={category.categoryName}
+                onChange={(e) => handleCategoryChange(index, e)}
+                placeholder="Ex: Frontend, Backend, DevOps"
+                required
+              />
+
+              <StyledLabelGeneric htmlFor={`skills-${index}`}>
+                Habilidades
+              </StyledLabelGeneric>
+              <StyledInput
+                id={`skills-${index}`}
+                name="skills"
+                value={category.skills}
+                onChange={(e) => handleCategoryChange(index, e)}
+                placeholder="Ex: React, Vue, Angular"
+                required
+              />
+
+              {userProfile.skillCategories.length > 1 && (
+                <StyledButtonContainer>
+                  <StyledButton
+                    type="button"
+                    onClick={() => removeSkillCategory(index)}
+                  >
+                    Remover Categoria
+                  </StyledButton>
+                </StyledButtonContainer>
+              )}
+            </StyledContainer>
+          ))}
+
+          <StyledButtonContainer>
+            <StyledButton type="button" onClick={addSkillCategory}>
+              Adicionar Categoria
+            </StyledButton>
+          </StyledButtonContainer>
         </StyledBorderBox>
 
         <StyledBorderBox>
@@ -339,8 +455,8 @@ export const CurriculumForm = () => {
               </StyledLabelGeneric>
               <StyledInput
                 id={`course-${index}`}
-                name="course"
-                value={edu.course}
+                name="name"
+                value={edu.name}
                 onChange={(e) => handleEducationChange(index, e)}
                 placeholder="Ex: Curso de React"
                 required
@@ -369,6 +485,17 @@ export const CurriculumForm = () => {
                 placeholder="Ano de Conclusão/Previsão"
                 required
               />
+
+              {userProfile.education.length > 1 && (
+                <StyledButtonContainer>
+                  <StyledButton
+                    type="button"
+                    onClick={() => removeEducationField(index)}
+                  >
+                    Remover Formação
+                  </StyledButton>
+                </StyledButtonContainer>
+              )}
             </StyledContainer>
           ))}
 
@@ -407,6 +534,15 @@ export const CurriculumForm = () => {
                 placeholder="Breve descrição do projeto"
                 required
               />
+
+              <StyledButtonContainer>
+                <StyledButton
+                  type="button"
+                  onClick={() => removeProjectField(index)}
+                >
+                  Remover Projeto
+                </StyledButton>
+              </StyledButtonContainer>
             </StyledContainer>
           ))}
 
@@ -418,11 +554,11 @@ export const CurriculumForm = () => {
         </StyledBorderBox>
 
         <StyledBorderBox>
-          <StyledLabelAA htmlFor="additionalActivities">
+          <StyledLabel htmlFor="additionalActivities">
             Atividades Adicionais
-          </StyledLabelAA>
+          </StyledLabel>
 
-          {userProfile.additionalActivities.map((activity, index) => (
+          {userProfile.additionalActivities?.map((activity, index) => (
             <StyledContainer key={index}>
               <StyledLabelGeneric htmlFor={`description-${index}`}>
                 Descrição
@@ -435,6 +571,15 @@ export const CurriculumForm = () => {
                 placeholder="Eventos, Mentorias, Voluntariado, etc"
                 required
               />
+
+              <StyledButtonContainer>
+                <StyledButton
+                  type="button"
+                  onClick={() => removeAdditionalActivityField(index)}
+                >
+                  Remover Atividade
+                </StyledButton>
+              </StyledButtonContainer>
             </StyledContainer>
           ))}
 
@@ -444,6 +589,7 @@ export const CurriculumForm = () => {
             </StyledButton>
           </StyledButtonContainer>
         </StyledBorderBox>
+
         <StyledButtonContainer>
           <StyledButton type="submit">Gerar Currículo</StyledButton>
         </StyledButtonContainer>
