@@ -37,9 +37,11 @@ export const CurriculumForm = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    const API_URL = process.env.REACT_APP_API_URL;
+
     try {
       const response: AxiosResponse = await axios.post(
-        "https://api-curriculum-maker-production.up.railway.app/api/curriculum/generate",
+        `${API_URL}/curriculum/generate`,
         userProfile,
         { responseType: "blob" }
       );
