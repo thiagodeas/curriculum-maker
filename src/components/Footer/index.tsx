@@ -7,7 +7,6 @@ export const Footer = () => {
         <StyledFooter>
                 © 2024 / Desenvolvido por Thiago Sousa / Todos os direitos reservados
                 <StyledContainer>
-
                     <StyledLink
                     href="https://www.linkedin.com/in/thiagodsousa/" 
                     target="_blank" 
@@ -22,7 +21,6 @@ export const Footer = () => {
                         <VscGithubAlt />
                         </StyledLink>
                 </StyledContainer>
-
         </StyledFooter>
     )
 }

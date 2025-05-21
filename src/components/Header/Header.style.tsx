@@ -23,7 +23,6 @@ export const StyledHeader = styled.header `
         }
     }
 
-
     h1 {
         font-size: 3rem;
         font-weight: 800;
@@ -42,7 +41,6 @@ export const StyledHeader = styled.header `
         @media (max-width: 400px) {
             font-size: 1.8rem;
         }
-        
     }
 
     p {
