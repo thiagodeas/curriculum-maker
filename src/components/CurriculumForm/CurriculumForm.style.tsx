@@ -69,21 +69,8 @@ export const StyledBorderBox= styled.div `
 
 export const StyledLabel = styled.label `
     font-size: 2rem;
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-weight: 600;
-    padding-bottom: 2rem;
-    color: #546061;
-
-    @media (max-width: 600px) {
-            font-size: 1.7rem;
-        }
-`
-
-export const StyledLabelAA = styled.label `
-    font-size: 2rem;
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    font-weight: 600;
-    margin-top: 2rem;
     padding-bottom: 2rem;
     color: #546061;
 
