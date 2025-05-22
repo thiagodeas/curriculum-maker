@@ -115,3 +115,13 @@ export const StyledButton = styled.button `
         background-color: #e5e6e5;
     }
 `
+
+export const StyledHelperText = styled.span`
+    font-size: 0.85rem;
+    color: #6D9CA1;
+    margin-top: -10px;
+    margin-bottom: 1rem;
+    text-align: center;
+    max-width: 300px;
+    letter-spacing: 1px;
+`;

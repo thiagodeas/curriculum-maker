@@ -6,6 +6,7 @@ import {
   StyledButtonContainer,
   StyledContainer,
   StyledForm,
+  StyledHelperText,
   StyledInput,
   StyledLabel,
   StyledLabelGeneric,
@@ -29,7 +30,7 @@ export const CurriculumForm = () => {
     github: "",
     aboutMe: "",
     experience: [],
-    skillCategories: [{ categoryName: "", skills: [""] }],
+    knowledgeByCategory: [{ categoryName: "", skills: [""] }],
     education: [{ name: "", institution: "", year: "" }],
     projects: [],
     additionalActivities: [],
@@ -131,7 +132,7 @@ export const CurriculumForm = () => {
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
     const { name, value } = e.target;
-    const updated = [...userProfile.skillCategories];
+    const updated = [...userProfile.knowledgeByCategory];
 
     if (name === "categoryName") {
       updated[index].categoryName = value;
@@ -139,23 +140,23 @@ export const CurriculumForm = () => {
       updated[index].skills = value.split(",").map((skill) => skill.trim());
     }
 
-    setUserProfile({ ...userProfile, skillCategories: updated });
+    setUserProfile({ ...userProfile, knowledgeByCategory: updated });
   };
 
-  const addSkillCategory = () => {
+  const addKnowledgeBlock = () => {
     setUserProfile((prev) => ({
       ...prev,
-      skillCategories: [
-        ...prev.skillCategories,
+      knowledgeByCategory: [
+        ...prev.knowledgeByCategory,
         { categoryName: "", skills: [""] },
       ],
     }));
   };
 
-  const removeSkillCategory = (index: number) => {
+  const removeKnowledgeBlock = (index: number) => {
     setUserProfile((prev) => ({
       ...prev,
-      skillCategories: prev.skillCategories.filter((_, i) => i !== index),
+      knowledgeByCategory: prev.knowledgeByCategory.filter((_, i) => i !== index),
     }));
   };
 
@@ -383,8 +384,13 @@ export const CurriculumForm = () => {
                 name="period"
                 value={exp.period}
                 onChange={(e) => handleExperienceChange(index, e)}
-                placeholder="05/2022 - 10/2024"
+                placeholder="Ex: 05/2022 - 10/2024"
               />
+              <StyledHelperText>
+              Use o formato mês/ano - mês/ano
+              < br/>ou< br/>
+              mês/ano - Atualmente
+              </StyledHelperText>
 
               <StyledLabelGeneric>Descrição</StyledLabelGeneric>
               <StyledInput
@@ -416,7 +422,7 @@ export const CurriculumForm = () => {
         <StyledBorderBox>
           <StyledLabel htmlFor="skills">Conhecimentos</StyledLabel>
 
-          {userProfile.skillCategories.map((category, index) => (
+          {userProfile.knowledgeByCategory.map((category, index) => (
             <StyledContainer key={index}>
               <StyledLabelGeneric htmlFor={`category-${index}`}>
                 Categoria
@@ -442,11 +448,11 @@ export const CurriculumForm = () => {
                 required
               />
 
-              {userProfile.skillCategories.length > 1 && (
+              {userProfile.knowledgeByCategory.length > 1 && (
                 <StyledButtonContainer>
                   <StyledButton
                     type="button"
-                    onClick={() => removeSkillCategory(index)}
+                    onClick={() => removeKnowledgeBlock(index)}
                   >
                     Remover Categoria
                   </StyledButton>
@@ -456,8 +462,8 @@ export const CurriculumForm = () => {
           ))}
 
           <StyledButtonContainer>
-            <StyledButton type="button" onClick={addSkillCategory}>
-              Adicionar Categoria
+            <StyledButton type="button" onClick={addKnowledgeBlock}>
+              Adicionar Conhecimento
             </StyledButton>
           </StyledButtonContainer>
         </StyledBorderBox>
