@@ -21,6 +21,11 @@ A web application to generate minimalist and professional resumes in PDF format 
 - React Icons 
 - React Toastify 
 
+## Access on Vercel
+
+You can access the deployed app by clicking here: [Curriculum Maker](https://curriculum-maker.vercel.app/)
+
+
 ## 🚀 How to Run Locally
 
 Follow these steps to run the project locally:
@@ -40,7 +45,7 @@ npm install
 
 Create a `.env` file in the root directory of the project with the following content:
 
-REACT_APP_API_URL=https://your-backend-url/api
+VITE_API_URL=https://your-backend-url/api
 
 Replace `https://your-backend-url/api` with your actual backend API URL.
 
