@@ -37,7 +37,7 @@ export const CurriculumForm = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const API_URL = process.env.REACT_APP_API_URL;
+    const API_URL = import.meta.env.VITE_API_URL;
 
     try {
       const response: AxiosResponse = await axios.post(
@@ -123,7 +123,13 @@ export const CurriculumForm = () => {
   ) => {
     const { name, value } = e.target;
     const updated = [...userProfile.skillCategories];
-    updated[index][name as "categoryName"] = value;
+
+    if (name === "categoryName") {
+      updated[index].categoryName = value;
+    } else if (name === "skills") {
+      updated[index].skills = value.split(",").map((skill) => skill.trim());
+    }
+
     setUserProfile({ ...userProfile, skillCategories: updated });
   };
 
@@ -215,7 +221,7 @@ export const CurriculumForm = () => {
       ...userProfile,
       additionalActivities: [
         ...(userProfile.additionalActivities ?? []),
-        { period: "", description: "" },
+        { description: "" },
       ],
     });
   };
@@ -368,7 +374,7 @@ export const CurriculumForm = () => {
                 name="period"
                 value={exp.period}
                 onChange={(e) => handleExperienceChange(index, e)}
-                placeholder="Período"
+                placeholder="05/2022 - 10/2024"
               />
 
               <StyledLabelGeneric>Descrição</StyledLabelGeneric>
@@ -411,7 +417,7 @@ export const CurriculumForm = () => {
                 name="categoryName"
                 value={category.categoryName}
                 onChange={(e) => handleCategoryChange(index, e)}
-                placeholder="Ex: Frontend, Backend, DevOps"
+                placeholder="Ex: Frontend, Backend, Database"
                 required
               />
 
@@ -421,7 +427,7 @@ export const CurriculumForm = () => {
               <StyledInput
                 id={`skills-${index}`}
                 name="skills"
-                value={category.skills}
+                value={category.skills.join(", ")}
                 onChange={(e) => handleCategoryChange(index, e)}
                 placeholder="Ex: React, Vue, Angular"
                 required
