@@ -14,6 +14,7 @@ import {
 } from "./CurriculumForm.style";
 import axios, { AxiosResponse } from "axios";
 import { toast } from "react-toastify";
+import { validateUserProfile } from "../../utils/validateUserProfile";
 
 export const CurriculumForm = () => {
   const [userProfile, setUserProfile] = useState<UserProfile>({
@@ -36,6 +37,14 @@ export const CurriculumForm = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    const errors = validateUserProfile(userProfile);
+
+    if (errors.length > 0) {
+      errors.forEach((error) => toast.error(error));
+      
+      return;
+    }
 
     const API_URL = import.meta.env.VITE_API_URL;
 
