@@ -17,7 +17,7 @@ export interface UserProfile {
     description: string;
   }>;
 
-  skillCategories: Array<{
+  knowledgeByCategory: Array<{
     categoryName: string;
     skills: Array<string>;
   }>;
