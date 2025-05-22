@@ -34,7 +34,6 @@ export interface UserProfile {
   }>;
 
   additionalActivities?: Array<{
-    period: string;
     description: string;
   }>;
 }
