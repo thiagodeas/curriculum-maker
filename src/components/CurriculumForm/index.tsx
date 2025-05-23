@@ -36,14 +36,20 @@ export const CurriculumForm = () => {
     additionalActivities: [],
   });
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    setIsLoading(true);
 
     const errors = validateUserProfile(userProfile);
 
     if (errors.length > 0) {
       errors.forEach((error) => toast.error(error));
-      
+
+      setIsLoading(false);
+    
       return;
     }
 
@@ -65,6 +71,8 @@ export const CurriculumForm = () => {
       link.click();
 
       URL.revokeObjectURL(pdfUrl);
+
+      toast.success("Currículo gerado com sucesso!");
     } catch (error) {
       console.error("Erro ao gerar o currículo:", error);
 
@@ -85,6 +93,8 @@ export const CurriculumForm = () => {
       }
 
       toast.error(userMessage);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -614,7 +624,9 @@ export const CurriculumForm = () => {
         </StyledBorderBox>
 
         <StyledButtonContainer>
-          <StyledButton type="submit">Gerar Currículo</StyledButton>
+          <StyledButton type="submit" disabled={isLoading}>
+            {isLoading ? "Gerando..." : "Gerar Currículo"}
+          </StyledButton>
         </StyledButtonContainer>
       </StyledForm>
     </StyledMainContainer>
