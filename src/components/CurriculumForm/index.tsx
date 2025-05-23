@@ -424,7 +424,7 @@ export const CurriculumForm = () => {
 
           <StyledButtonContainer>
             <StyledButton type="button" onClick={addExperienceField}>
-              Adicionar Experiência
+              + Experiência
             </StyledButton>
           </StyledButtonContainer>
         </StyledBorderBox>
@@ -464,7 +464,7 @@ export const CurriculumForm = () => {
                     type="button"
                     onClick={() => removeKnowledgeBlock(index)}
                   >
-                    Remover Categoria
+                    Remover Conhecimento
                   </StyledButton>
                 </StyledButtonContainer>
               )}
@@ -473,7 +473,7 @@ export const CurriculumForm = () => {
 
           <StyledButtonContainer>
             <StyledButton type="button" onClick={addKnowledgeBlock}>
-              Adicionar Conhecimento
+              + Conhecimento
             </StyledButton>
           </StyledButtonContainer>
         </StyledBorderBox>
@@ -534,7 +534,7 @@ export const CurriculumForm = () => {
 
           <StyledButtonContainer>
             <StyledButton type="button" onClick={addEducationField}>
-              Adicionar Formação
+              + Formação
             </StyledButton>
           </StyledButtonContainer>
         </StyledBorderBox>
@@ -581,7 +581,7 @@ export const CurriculumForm = () => {
 
           <StyledButtonContainer>
             <StyledButton type="button" onClick={addProjectField}>
-              Adicionar Projeto
+              + Projeto
             </StyledButton>
           </StyledButtonContainer>
         </StyledBorderBox>
@@ -618,7 +618,7 @@ export const CurriculumForm = () => {
 
           <StyledButtonContainer>
             <StyledButton type="button" onClick={addAdditionalActivityField}>
-              Adicionar Atividade
+              + Atividade
             </StyledButton>
           </StyledButtonContainer>
         </StyledBorderBox>
