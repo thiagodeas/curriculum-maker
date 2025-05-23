@@ -5,7 +5,7 @@ import { VscGithubAlt } from "react-icons/vsc";
 export const Footer = () => {
   return (
     <StyledFooter>
-      © 2024 / Desenvolvido por Thiago Sousa / Todos os direitos reservados
+      © 2025 / Desenvolvido por Thiago Sousa / Todos os direitos reservados
       <StyledContainer>
         <StyledLink
           href="https://www.linkedin.com/in/thiagodsousa/"
