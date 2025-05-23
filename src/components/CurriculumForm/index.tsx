@@ -416,7 +416,7 @@ export const CurriculumForm = () => {
                   type="button"
                   onClick={() => removeExperienceField(index)}
                 >
-                  Remover Experiência
+                  - Experiência
                 </StyledButton>
               </StyledButtonContainer>
             </StyledContainer>
@@ -464,7 +464,7 @@ export const CurriculumForm = () => {
                     type="button"
                     onClick={() => removeKnowledgeBlock(index)}
                   >
-                    Remover Conhecimento
+                    - Conhecimento
                   </StyledButton>
                 </StyledButtonContainer>
               )}
@@ -525,7 +525,7 @@ export const CurriculumForm = () => {
                     type="button"
                     onClick={() => removeEducationField(index)}
                   >
-                    Remover Formação
+                    - Formação
                   </StyledButton>
                 </StyledButtonContainer>
               )}
@@ -573,7 +573,7 @@ export const CurriculumForm = () => {
                   type="button"
                   onClick={() => removeProjectField(index)}
                 >
-                  Remover Projeto
+                  - Projeto
                 </StyledButton>
               </StyledButtonContainer>
             </StyledContainer>
@@ -610,7 +610,7 @@ export const CurriculumForm = () => {
                   type="button"
                   onClick={() => removeAdditionalActivityField(index)}
                 >
-                  Remover Atividade
+                  - Atividade
                 </StyledButton>
               </StyledButtonContainer>
             </StyledContainer>
