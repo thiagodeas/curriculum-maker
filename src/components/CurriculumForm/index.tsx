@@ -51,7 +51,7 @@ export const CurriculumForm = () => {
 
     try {
       const response: AxiosResponse = await axios.post(
-        `${API_URL}/curriculum/generate`,
+        `${API_URL}/api/curriculum/generate`,
         userProfile,
         { responseType: "blob" }
       );
